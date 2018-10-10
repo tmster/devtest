@@ -3,19 +3,21 @@ module Api
     module Protected
       class TargetGroupsController < BaseController
         def index
-          render json: {}
+          target_groups = TargetGroup.by_country_and_panel_provider(@country)
+
+          render json: TargetGroupSerializer.new(target_groups, { params: { authorized_area: true }}).serialized_json
         end
 
         def evaluate
-          return if validate_params
+          return if params_validation_failed?
 
-          render json: {}
+          render json: { price: @country.panel_provider.price }
         end
 
         private
 
-        def validate_params
-          # FIXME Convert params to unsafe hash to avoid Type missmatch in dry validation
+        def params_validation_failed?
+          # FIXME Convert params to unsafe hash to avoid Type mismatch in dry validation
           validation_result = TargetParamsSchema.call(params.to_unsafe_hash)
           return if validation_result.success?
 
