@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module PriceLogic
   module Backend
     class TimesWithA < Base
       def name
-        "times_a"
+        'times_a'
       end
 
       def call
@@ -12,11 +14,11 @@ module PriceLogic
       private
 
       def url
-        "http://time.com/"
+        'http://time.com/'
       end
 
       def calculate_letters
-        web_content.count("a")
+        web_content.count('a')
       end
     end
   end

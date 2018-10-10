@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class BaseController < ApplicationController
@@ -11,7 +13,7 @@ module Api
       end
 
       def set_country
-        @country ||= Country.find_by!(code: params[:country_code])
+        @country = Country.find_by!(code: params[:country_code])
       end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     module Protected
@@ -5,7 +7,7 @@ module Api
         def index
           target_groups = TargetGroup.by_country_and_panel_provider(@country)
 
-          render json: TargetGroupSerializer.new(target_groups, { params: { authorized_area: true }}).serialized_json
+          render json: TargetGroupSerializer.new(target_groups, params: { authorized_area: true }).serialized_json
         end
 
         def evaluate
@@ -17,7 +19,7 @@ module Api
         private
 
         def params_validation_failed?
-          # FIXME Convert params to unsafe hash to avoid Type mismatch in dry validation
+          # FIXME: Convert params to unsafe hash to avoid Type mismatch in dry validation
           validation_result = TargetParamsSchema.call(params.to_unsafe_hash)
           return if validation_result.success?
 

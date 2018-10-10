@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'open-uri'
 
 module PriceLogic
@@ -16,7 +18,7 @@ module PriceLogic
       private
 
       def web_content
-        @web_content ||= open(url).read
+        @web_content ||= Scraper.new(url).content
       end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     module Protected
@@ -13,7 +15,7 @@ module Api
         end
 
         def render_unauthorized
-          render json: { errors: ["Invalid token"] }, status: :unauthorized
+          render json: { errors: ['Invalid token'] }, status: :unauthorized
         end
 
         def authenticate

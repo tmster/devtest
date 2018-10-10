@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module PriceLogic
   module Backend
     class TimesNodes < Base
       def name
-        "times_html"
+        'times_html'
       end
 
       def call
@@ -12,7 +14,7 @@ module PriceLogic
       private
 
       def url
-        "http://time.com/"
+        'http://time.com/'
       end
 
       def html_nodes

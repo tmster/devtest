@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module PriceLogic
   module Backend
     class TenArrays < Base
       def name
-        "10_arrays"
+        '10_arrays'
       end
 
       def call
@@ -12,7 +14,7 @@ module PriceLogic
       private
 
       def url
-        "http://openlibrary.org/search.json?q=the+lord+of+the+rings"
+        'http://openlibrary.org/search.json?q=the+lord+of+the+rings'
       end
 
       def json

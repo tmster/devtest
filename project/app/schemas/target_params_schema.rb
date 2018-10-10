@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 TargetParamsSchema = Dry::Validation.Schema do
   required(:country_code).value(format?: /[A-Z]{2}/)
   required(:target_group_id).filled
