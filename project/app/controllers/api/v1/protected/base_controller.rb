@@ -6,10 +6,18 @@ module Api
 
         private
 
-        def authenticate
-          authenticate_or_request_with_http_token do |token, options|
+        def authenticate_token
+          authenticate_or_request_with_http_token do |token, _options|
             ActiveSupport::SecurityUtils.secure_compare(token, Rails.application.credentials.auth_token)
           end
+        end
+
+        def render_unauthorized
+          render json: { errors: ["Invalid token"] }, status: :unauthorized
+        end
+
+        def authenticate
+          authenticate_token || render_unauthorized
         end
       end
     end

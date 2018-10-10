@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       namespace :protected do
         get 'locations/:country_code', to: 'locations#index', constraints: { country_code: /[A-Z]{2}/ }
         get 'target_groups/:country_code', to: 'target_groups#index', constraints: { country_code: /[A-Z]{2}/ }
-        post "evaluate_target", to: "evaluate_target#evaluate"
+        post "evaluate_target", to: "target_groups#evaluate"
       end
       get 'locations/:country_code', to: 'locations#index', constraints: { country_code: /[A-Z]{2}/ }
       get 'target_groups/:country_code', to: 'target_groups#index', constraints: { country_code: /[A-Z]{2}/ }
