@@ -1,4 +1,6 @@
 class PanelProvider < ApplicationRecord
+  has_many :location_groups
+
   validates :code, presence: true, uniqueness: true
 
   def price
