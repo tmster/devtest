@@ -28,26 +28,26 @@ COUNTRIES = [
 ].freeze
 
 LOCATIONS = [
-  { name: "New York" },
-  { name: "Los Angeles" },
-  { name: "Chicago" },
-  { name: "Houston" },
-  { name: "Philadelphia" },
-  { name: "Phoenix" },
-  { name: "San Antonio" },
-  { name: "San Diego" },
-  { name: "Dallas" },
-  { name: "San Jose" },
-  { name: "Austin" },
-  { name: "Jacksonville" },
-  { name: "San Francisco" },
-  { name: "Indianapolis" },
-  { name: "Columbus" },
-  { name: "Fort Worth" },
-  { name: "Charlotte" },
-  { name: "Detroit" },
-  { name: "El Paso" },
-  { name: "Seattle" }
+  { name: "New York", location_group_name: "Alpha" },
+  { name: "Los Angeles", location_group_name: "Bravo" },
+  { name: "Chicago", location_group_name: "Charlie" },
+  { name: "Houston", location_group_name: "Delta" },
+  { name: "Philadelphia", location_group_name: "Alpha" },
+  { name: "Phoenix", location_group_name: "Bravo" },
+  { name: "San Antonio", location_group_name: "Charlie" },
+  { name: "San Diego", location_group_name: "Delta" },
+  { name: "Dallas", location_group_name: "Alpha" },
+  { name: "San Jose", location_group_name: "Bravo" },
+  { name: "Austin", location_group_name: "Charlie" },
+  { name: "Jacksonville", location_group_name: "Delta" },
+  { name: "San Francisco", location_group_name: "Alpha" },
+  { name: "Indianapolis", location_group_name: "Bravo" },
+  { name: "Columbus", location_group_name: "Charlie" },
+  { name: "Fort Worth", location_group_name: "Delta" },
+  { name: "Charlotte", location_group_name: "Alpha" },
+  { name: "Detroit", location_group_name: "Bravo" },
+  { name: "El Paso", location_group_name: "Charlie" },
+  { name: "Seattle", location_group_name: "Delta" }
 ].freeze
 
 
@@ -322,19 +322,20 @@ COUNTRIES.each do |country|
   )
 end
 
-LOCATIONS.each do |location|
-  Location.create!(
-    name: location.fetch(:name),
-    external_id: SecureRandom.uuid,
-    secret_code: SecureRandom.hex(64)
-  )
-end
-
 LOCATION_GROUPS.each do |location_group|
   LocationGroup.create!(
     name: location_group.fetch(:name),
     country: Country.find_by!(code: location_group.fetch(:country_code)),
     panel_provider: PanelProvider.find_by!(code: location_group.fetch(:panel_provider_code))
+  )
+end
+
+LOCATIONS.each do |location|
+  Location.create!(
+    name: location.fetch(:name),
+    external_id: SecureRandom.uuid,
+    secret_code: SecureRandom.hex(64),
+    location_group: LocationGroup.find_by!(name: location.fetch(:location_group_name))
   )
 end
 
